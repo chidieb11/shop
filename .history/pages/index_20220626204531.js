@@ -4,7 +4,13 @@ export default function Home() {
   return (
     <div className="">
       <Layout title="Home Page">
-        <div className="">body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
+        <div>body</div>
       </Layout>
     </div>
   );
