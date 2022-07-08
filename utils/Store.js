@@ -1,11 +1,13 @@
 import Cookies from "js-cookie";
 import { createContext, useReducer } from "react";
 
+// @ts-ignore
 export const Store = createContext();
 
 const initialState = {
   cart: Cookies.get("cart")
-    ? JSON.parse(Cookies.get("cart"))
+    ? // @ts-ignore
+      JSON.parse(Cookies.get("cart"))
     : { cartItems: [], shippingAddress: {} },
 };
 

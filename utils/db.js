@@ -8,6 +8,7 @@ async function connect() {
     return;
   }
 
+  // @ts-ignore
   if (mongoose.connection.length > 0) {
     connection.isConnected = mongoose.connections[0].readyState;
     if (connection.isConnected === 1) {
@@ -16,8 +17,10 @@ async function connect() {
     }
     await mongoose.disconnect();
   }
+  // @ts-ignore
   const db = await mongoose.connect(process.env.MONGODB_URI);
   console.log("New connection established");
+  // @ts-ignore
   connection.isConnected = db.connections[0].readyState;
 }
 
@@ -32,5 +35,18 @@ async function disconnect() {
   }
 }
 
-const db = { connect, disconnect };
+function convertDocToObj(doc) {
+  if (doc._id) {
+    doc._id = doc._id.toString();
+  }
+  if (doc.createdAt) {
+    doc.createdAt = doc.createdAt.toString();
+  }
+  if (doc.updatedAt) {
+    doc.updatedAt = doc.updatedAt.toString();
+  }
+  return doc;
+}
+
+const db = { connect, disconnect, convertDocToObj };
 export default db;
