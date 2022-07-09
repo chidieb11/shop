@@ -3,6 +3,7 @@ import Link from "next/link";
 import getError from "../utils/error";
 import axios from "axios";
 import Layout from "../components/Layout";
+import {useSession} from "next-auth/react";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -18,24 +19,27 @@ function reducer(state, action) {
 }
 
 const OrderHistoryScreen = () => {
+    const {data: session} = useSession();
     const [{loading, error, orders}, dispatch] = useReducer(reducer, {
         loading: true,
         orders: [],
         error: ""
     });
-    console.log(orders);
+
     useEffect(() => {
+        console.log(session.user);
         const fetchOrders = async () => {
             try {
                 dispatch({type: "FETCH_REQUEST"});
-                const {data} = await axios.get("/api/orders/history");
+                const {data} = await axios.get(`/api/orders/history?id=${session.user._id}`);
                 dispatch({type: "FETCH_SUCCESS", payload: data});
+                console.log({data});
             } catch (error) {
                 dispatch({type: "FETCH_FAIL", payload: getError(error)});
             }
         };
         fetchOrders();
-    }, []);
+    }, [session.user._id]);
 
     return (
         <Layout title="Order History">
@@ -45,7 +49,7 @@ const OrderHistoryScreen = () => {
             ) : error ? (
                 <div className="alert-error">{error}</div>
             ) : (
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto md:mr-64">
                     <table className="min-w-full">
                         <thead className="border-b">
                         <tr>

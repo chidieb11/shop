@@ -177,6 +177,6 @@ const PlaceOrderScreen = () => {
         </Layout>
     );
 };
-// PlaceOrderScreen.auth = true;
+PlaceOrderScreen.auth = true;
 
 export default PlaceOrderScreen;

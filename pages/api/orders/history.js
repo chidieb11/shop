@@ -10,9 +10,10 @@ const handler = async (req, res) => {
 
     await db.connect();
 
-    const order = await Order.findById(req.query.id);
+    const order = await Order.find().where("user").equals(req.query.id);
+
     await db.disconnect();
-    res.send(order);
+    res.json(order);
 };
 
 export default handler;
