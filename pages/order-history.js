@@ -79,7 +79,7 @@ const OrderHistoryScreen = () => {
                                 </td>
                                 <td className=" p-5 ">
                                     <Link href={`/order/${order._id}`} passHref>
-                                        <a>Details</a>
+                                        <a className="border-b">Details</a>
                                     </Link>
                                 </td>
                             </tr>
