@@ -150,11 +150,12 @@ const AdminProductEditScreen = () => {
                             onSubmit={handleSubmit(submitHandler)}
                         >
                             <h1 className="mb-4 text-xl">{`Edit Product ${productId}`}</h1>
-                            <div className="mb-4">
-                                <label htmlFor="name">Name</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="name">Name</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="name"
                                     autoFocus
                                     {...register("name", {
@@ -165,11 +166,12 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.name.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="slug">Slug</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="slug">Slug</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="slug"
                                     {...register("slug", {
                                         required: "Please enter slug",
@@ -179,11 +181,12 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.slug.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="price">Price</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="price">Price</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="price"
                                     {...register("price", {
                                         required: "Please enter price",
@@ -193,11 +196,12 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.price.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="image">image</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="image">image</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="image"
                                     {...register("image", {
                                         required: "Please enter image",
@@ -207,22 +211,24 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.image.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="imageFile">Upload image</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="imageFile">Upload image</label>
                                 <input
                                     type="file"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="imageFile"
                                     onChange={uploadHandler}
                                 />
 
                                 {loadingUpload && <div>Uploading....</div>}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="category">category</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="category">category</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="category"
                                     {...register("category", {
                                         required: "Please enter category",
@@ -232,11 +238,12 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.category.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="brand">brand</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="brand">brand</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="brand"
                                     {...register("brand", {
                                         required: "Please enter brand",
@@ -246,11 +253,12 @@ const AdminProductEditScreen = () => {
                                     <div className="text-red-500">{errors.brand.message}</div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="countInStock">countInStock</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="countInStock">countInStock</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="countInStock"
                                     {...register("countInStock", {
                                         required: "Please enter countInStock",
@@ -262,11 +270,12 @@ const AdminProductEditScreen = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="countInStock">description</label>
+                            <div className="mb-4 flex flex-col">
+                                <label className="font-bold font-mono" htmlFor="countInStock">description</label>
                                 <input
                                     type="text"
-                                    className="w-full"
+                                    className="w-full md:w-96"
+                                    style={{border: "1px solid #ccc", outline: "none"}}
                                     id="description"
                                     {...register("description", {
                                         required: "Please enter description",
@@ -279,12 +288,14 @@ const AdminProductEditScreen = () => {
                                 )}
                             </div>
                             <div className="mb-4">
-                                <button disabled={loadingUpdate} className="primary-button w-full">
+                                <button disabled={loadingUpdate}
+                                        className="primary-button w-full md:w-96 font-bold font-mono">
                                     {loadingUpdate ? "Loading" : "Update"}
                                 </button>
                             </div>
                             <div className="mb-4">
-                                <Link href={`/admin/products`}><a className="flex justify-center">Back</a></Link>
+                                <Link href={`/admin/products`}><a
+                                    className="flex justify-center md:w-96 font-bold font-mono">Back</a></Link>
                             </div>
                         </form>
                     )}

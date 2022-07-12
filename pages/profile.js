@@ -40,13 +40,14 @@ const ProfileScreen = () => {
                 className="mx-auto max-w-screen-md"
                 onSubmit={handleSubmit(submitHandler)}
             >
-                <h1 className="mb-4 text-xl">Update Profile</h1>
+                <h1 className="mb-4 text-xl font-bold font-mono">Update Profile</h1>
 
-                <div className="mb-4">
-                    <label htmlFor="name">Name</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="name" className="font-mono font-bold">Name</label>
                     <input
                         type="text"
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         id="name"
                         autoFocus
                         {...register("name", {
@@ -58,11 +59,12 @@ const ProfileScreen = () => {
                     )}
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="email">Email</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="email" className="font-mono font-bold">Email</label>
                     <input
                         type="email"
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         id="email"
                         {...register("email", {
                             required: "Please enter email",
@@ -77,10 +79,11 @@ const ProfileScreen = () => {
                     )}
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="password">Password</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="password" className="font-mono font-bold">Password</label>
                     <input
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         type="password"
                         id="password"
                         {...register("password", {
@@ -92,10 +95,11 @@ const ProfileScreen = () => {
                     )}
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="confirmPassword" className="font-mono font-bold">Confirm Password</label>
                     <input
-                        className="w-full border-b"
+                        className="w-full border-b md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         type="password"
                         id="confirmPassword"
                         {...register("confirmPassword", {
@@ -117,7 +121,7 @@ const ProfileScreen = () => {
                         )}
                 </div>
                 <div className="mb-4">
-                    <button className="primary-button w-full">Update Profile</button>
+                    <button className="primary-button w-full md:w-96 font-mono font-bold">Update Profile</button>
                 </div>
             </form>
         </Layout>

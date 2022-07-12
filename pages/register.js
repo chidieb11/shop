@@ -1,14 +1,14 @@
-import Link from "next/link";
 import React, {useEffect} from "react";
-import {signIn, useSession} from "next-auth/react";
-import {useForm} from "react-hook-form";
 import Layout from "../components/Layout";
 import {toast} from "react-toastify";
-import {useRouter} from "next/router";
-import axios from "axios";
 import getError from "../utils/error";
+import {useRouter} from "next/router";
+import {signIn, useSession} from "next-auth/react";
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import Link from "next/link";
 
-export default function RegisterScreen() {
+const RegisterScreen = () => {
     const {data: session} = useSession();
 
     const router = useRouter();
@@ -52,12 +52,13 @@ export default function RegisterScreen() {
                 className="mx-auto max-w-screen-md"
                 onSubmit={handleSubmit(submitHandler)}
             >
-                <h1 className="mb-4 text-xl">Create Account</h1>
-                <div className="mb-4">
-                    <label htmlFor="name">Name</label>
+                <h1 className="mb-4 text-xl font-bold font-mono">Create Account</h1>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="name" className="font-bold font-mono">Name</label>
                     <input
                         type="text"
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         id="name"
                         autoFocus
                         {...register("name", {
@@ -69,8 +70,8 @@ export default function RegisterScreen() {
                     )}
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="email">Email</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="email" className="font-bold font-mono">Email</label>
                     <input
                         type="email"
                         {...register("email", {
@@ -80,22 +81,24 @@ export default function RegisterScreen() {
                                 message: "Please enter valid email",
                             },
                         })}
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         id="email"
                     ></input>
                     {errors.email && (
                         <div className="text-red-500">{errors.email.message}</div>
                     )}
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="password">Password</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="password" className="font-bold font-mono">Password</label>
                     <input
                         type="password"
                         {...register("password", {
                             required: "Please enter password",
                             minLength: {value: 6, message: "password is more than 5 chars"},
                         })}
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         id="password"
                         autoFocus
                     ></input>
@@ -103,10 +106,11 @@ export default function RegisterScreen() {
                         <div className="text-red-500 ">{errors.password.message}</div>
                     )}
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                <div className="mb-4 flex flex-col">
+                    <label htmlFor="confirmPassword" className="font-bold font-mono">Confirm Password</label>
                     <input
-                        className="w-full"
+                        className="w-full md:w-96"
+                        style={{border: "1px solid #ccc", outline: "none"}}
                         type="password"
                         id="confirmPassword"
                         {...register("confirmPassword", {
@@ -129,18 +133,17 @@ export default function RegisterScreen() {
                         )}
                 </div>
 
-                <div className="mb-4 ">
-                    <button className="primary-button">Register</button>
+                <div className="mb-4">
+                    <button className="primary-button w-full md:w-96 font-mono font-bold">Register</button>
                 </div>
-                <div className="mb-4 font-mono font-bold">
+                <div className="mb-4 ">
                     Already have an account? &nbsp;
-                    <Link href={`/login?redirect=${redirect || "/"}`}>
-                        <a className="border-b-black -ml-3">
-                            Login
-                        </a>
-                    </Link>
+                    <Link href={`/login?redirect=${redirect || "/"}`}><a
+                        className="border-b text-green-900">Login</a></Link>
                 </div>
             </form>
         </Layout>
     );
-}
+};
+
+export default RegisterScreen;
