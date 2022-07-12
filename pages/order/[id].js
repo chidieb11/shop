@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import {toast} from "react-toastify";
+import {useSession} from "next-auth/react";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -24,6 +25,14 @@ function reducer(state, action) {
             return {...state, loadingPay: false, errorPay: action.payload};
         case "PAY_RESET":
             return {...state, loadingPay: false, successPay: false, errorPay: ""};
+        case "DELIVER_REQUEST":
+            return {...state, loadingDeliver: true};
+        case "DELIVER_SUCCESS":
+            return {...state, loadingDeliver: false, successDeliver: true};
+        case "DELIVER_FAIL":
+            return {...state, loadingDeliver: false};
+        case "DELIVER_RESET":
+            return {...state, loadingDeliver: false, successDeliver: false};
         default:
             state;
     }
@@ -31,11 +40,20 @@ function reducer(state, action) {
 
 const OrderScreen = () => {
     // order/:id
+    const {data: session} = useSession();
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
     const {query} = useRouter();
     const orderId = query.id;
 
-    const [{loading, error, order, loadingPay, successPay}, dispatch] = useReducer(reducer, {
+    const [{
+        loading,
+        error,
+        order,
+        loadingPay,
+        successPay,
+        loadingDeliver,
+        successDeliver
+    }, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
         error: ""
@@ -51,10 +69,13 @@ const OrderScreen = () => {
                 dispatch({type: "FETCH_FAIL", payload: getError(err)});
             }
         };
-        if (!order._id || successPay || (order._id && order._id !== orderId)) {
+        if (!order._id || successPay || successDeliver || (order._id && order._id !== orderId)) {
             fetchData();
             if (successPay) {
                 dispatch({type: "PAY_RESET"});
+            }
+            if (successDeliver) {
+                dispatch({type: "DELIVER_RESET"});
             }
         } else {
             const loadPaypalScript = async () => {
@@ -64,7 +85,7 @@ const OrderScreen = () => {
             };
             loadPaypalScript();
         }
-    }, [order, orderId, paypalDispatch, successPay]);
+    }, [order, orderId, paypalDispatch, successPay, successDeliver]);
 
     const {
         shippingAddress,
@@ -103,6 +124,18 @@ const OrderScreen = () => {
 
     function onError(error) {
         toast.error(getError(error));
+    }
+
+    async function deliverOrderHandler() {
+        try {
+            dispatch({type: "DELIVER_REQUEST"});
+            const {data} = await axios.put(`/api/admin/orders/${order._id}/deliver`, {});
+            dispatch({type: "DELIVER_SUCCESS", payload: data});
+            toast.success("Order is delivered successfully");
+        } catch (error) {
+            dispatch({type: "DELIVER_FAIL", payload: getError(error)});
+            toast.error(getError(error));
+        }
     }
 
     return (
@@ -221,6 +254,14 @@ const OrderScreen = () => {
                                             </div>
                                         )}
                                         {loadingPay && <div>Loading...</div>}
+                                    </li>
+                                )}
+                                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                                    <li>
+                                        {loadingDeliver && <div>Loading...</div>}
+                                        <button className="primary-button w-full" onClick={deliverOrderHandler}>Deliver
+                                            Order
+                                        </button>
                                     </li>
                                 )}
                             </ul>
