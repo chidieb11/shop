@@ -117,7 +117,7 @@ const ProfileScreen = () => {
                         )}
                 </div>
                 <div className="mb-4">
-                    <button className="primary-button">Update Profile</button>
+                    <button className="primary-button w-full">Update Profile</button>
                 </div>
             </form>
         </Layout>
