@@ -48,3 +48,9 @@ textarea {
 .alert-success {
     @apply my-3 bg-green-100 rounded-lg p-3 text-green-700
 }
+
+/* Carousel */
+.swiper-button-next,
+.swiper-button-prev {
+    color: darkgray !important;
+}

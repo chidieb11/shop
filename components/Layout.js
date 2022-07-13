@@ -43,7 +43,7 @@ const Layout = ({title, children}) => {
 
             <div className="flex min-h-screen flex-col justify-between">
                 {/* Navbar */}
-                <header className="top-0 sticky shadow-md">
+                <header className="top-0 sticky shadow-md z-40">
                     <nav className="flex justify-between items-center px-4 md:mx-40 h-16">
                         <Link href="/">
                             <a className="text-2xl font-bold font-mono capitalize">
