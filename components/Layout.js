@@ -57,8 +57,8 @@ const Layout = ({title, children}) => {
                                     {cartItemCount > 0 && (
                                         <span
                                             className="ml-1 rounded-full bg-red-600 text-white px-2 pt-1 text-center font-bold text-xs">
-                      {cartItemCount}
-                    </span>
+                                            {cartItemCount}
+                                        </span>
                                     )}
                                 </a>
                             </Link>
