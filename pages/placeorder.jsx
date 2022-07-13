@@ -78,14 +78,14 @@ const PlaceOrderScreen = () => {
                                 {shippingAddress.country}
                             </div>
                             <div>
-                                <Link href="/shipping">Edit</Link>
+                                <Link href="/shipping"><a className="text-green-900 border-b">Edit</a></Link>
                             </div>
                         </div>
                         <div className="card  p-5">
                             <h2 className="mb-2 text-lg">Payment Method</h2>
                             <div>{paymentMethod}</div>
                             <div>
-                                <Link href="/payment">Edit</Link>
+                                <Link href="/payment"><a className="text-green-900 border-b">Edit</a></Link>
                             </div>
                         </div>
                         <div className="card overflow-x-auto p-5">
@@ -127,7 +127,7 @@ const PlaceOrderScreen = () => {
                             </table>
                             <div>
                                 <Link href="/cart" className="border-b-green-800">
-                                    Edit
+                                    <a className="text-green-900 border-b">Edit</a>
                                 </Link>
                             </div>
                         </div>
