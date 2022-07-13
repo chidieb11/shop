@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const CarouselScreen = () => {
     return (
-        <div className="md:mr-64">
+        <div className="md:mr-64 cursor-pointer">
             <Swiper modules={
                 [Navigation, EffectFade]}
                     navigation
@@ -18,13 +18,13 @@ const CarouselScreen = () => {
                     loop
                     className="">
                 <SwiperSlide>
-                    <Image src={"/images/new1.jpg"} width={2000} height={1100} objectFit={"cover"}/>
+                    <Image src={"/images/new1.jpg"} width={2000} height={800} objectFit={"cover"}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={"/images/new2.jpg"} width={2000} height={1100} objectFit={"cover"}/>
+                    <Image src={"/images/new2.jpg"} width={2000} height={800} objectFit={"cover"}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={"/images/new3.jpg"} width={2000} height={1100} objectFit={"cover"}/>
+                    <Image src={"/images/new3.jpg"} width={2000} height={800} objectFit={"cover"}/>
                 </SwiperSlide>
             </Swiper>
         </div>
